@@ -1,0 +1,16 @@
+version: '3'
+services:
+  flyway:
+    image: boxfuse/flyway
+    command: -url=jdbc:mysql://db/tracker_dev -user=tracker migrate
+    volumes:
+      - ./tracker/migrations:/flyway/sql
+    depends_on:
+      - db
+  db:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3306:3306
