@@ -10,6 +10,12 @@ db_name=`echo $credentials | jq -r '.name'`
 db_username=`echo $credentials | jq -r '.username'`
 db_password=`echo $credentials | jq -r '.password'`
 
+echo "app_guid: ${app_guid}"
+echo "ip_address: ${ip_address}"
+echo "db_name: ${db_name}"
+echo "db_username: ${db_username}"
+echo "db_password: ${db_password}"
+
 echo "Opening ssh tunnel to $ip_address"
 cf ssh -N -L 63306:$ip_address:3306 pal-tracker-syanagihara &
 cf_ssh_pid=$!
