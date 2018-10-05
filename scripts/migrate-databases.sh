@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-sudo apt-get install jq
-
-app_guid=`cf app $1 --guid`
-
-cf curl /v2/apps/${app_guid}/env
-
 credentials=`cf curl /v2/apps/$app_guid/env | jq '.system_env_json.VCAP_SERVICES | .[] | .[] | select(.instance_name=="tracker-database") | .credentials'`
 
 ip_address=`echo $credentials | jq -r '.hostname'`
@@ -15,7 +9,6 @@ db_username=`echo $credentials | jq -r '.username'`
 db_password=`echo $credentials | jq -r '.password'`
 
 echo "app_guid: ${app_guid}"
-echo "credentials: ${credentials}"
 echo "ip_address: ${ip_address}"
 echo "db_name: ${db_name}"
 echo "db_username: ${db_username}"
