@@ -44,6 +44,7 @@ jobs:
         - echo "Deploying $RELEASE_TAG to review"
       after_success:
         - cf login -a $CF_API_URL -u $CF_USERNAME -p $CF_PASSWORD -o $CF_ORG -s review
+        - cf apps
         - scripts/migrate-databases.sh pal-tracker-syanagihara .
       deploy:
         provider: cloudfoundry
