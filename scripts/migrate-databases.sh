@@ -11,6 +11,7 @@ db_username=`echo $credentials | jq -r '.username'`
 db_password=`echo $credentials | jq -r '.password'`
 
 echo "app_guid: ${app_guid}"
+echo "credentials: ${credentials}"
 echo "ip_address: ${ip_address}"
 echo "db_name: ${db_name}"
 echo "db_username: ${db_username}"
