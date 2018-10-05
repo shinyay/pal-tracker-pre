@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+sudo apt-get install jq
+
 credentials=`cf curl /v2/apps/$app_guid/env | jq '.system_env_json.VCAP_SERVICES | .[] | .[] | select(.instance_name=="tracker-database") | .credentials'`
 
 ip_address=`echo $credentials | jq -r '.hostname'`
