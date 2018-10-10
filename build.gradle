@@ -41,3 +41,7 @@ flyway {
 task testMigrate(type: org.flywaydb.gradle.task.FlywayMigrateTask) {
     url = testDbUrl
 }
+
+springBoot {
+    buildInfo()
+}
